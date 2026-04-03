@@ -12,7 +12,7 @@
             --bg-color: #0a0a0a;
             --bg-secondary: #0d0d0d;
             --text-color: #e0e0e0;
-            --dim-color: #666;
+            --dim-color: #888888; /* Сделал чуть светлее для читаемости */
             --border-color: #333;
             --glow-color: rgba(0, 255, 65, 0.3);
             --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
@@ -41,6 +41,19 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+        }
+
+        /* Адаптация для скринридеров и SEO */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
         /* ===== Particles Background ===== */
@@ -103,6 +116,7 @@
             font-size: clamp(0.8rem, 2vw, 1.1rem);
             margin-top: var(--spacing-sm);
             text-shadow: 0 0 5px rgba(0, 204, 204, 0.3);
+            font-weight: normal;
         }
 
         .cursor-blink {
@@ -253,12 +267,14 @@
             margin-bottom: var(--spacing-xs);
             text-transform: uppercase;
             letter-spacing: 1px;
+            grid-column: 1 / -1;
+            margin-top: var(--spacing-xs);
         }
 
         /* ===== Hobbies Section ===== */
         .hobbies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: var(--spacing-md);
         }
 
@@ -289,6 +305,8 @@
         .edc-icon {
             margin-right: var(--spacing-xs);
             color: var(--primary-color);
+            width: 20px;
+            text-align: center;
         }
 
         .aquarium-stats {
@@ -403,7 +421,7 @@
             overflow: hidden;
             border-right: 2px solid var(--primary-color);
             white-space: nowrap;
-            animation: typing 3s steps(40, end), blink-cursor 0.75s step-end infinite;
+            animation: typing 2.5s steps(40, end), blink-cursor 0.75s step-end infinite;
         }
 
         @keyframes typing {
@@ -427,24 +445,19 @@
             .container {
                 padding: var(--spacing-sm);
             }
-
             .ascii-art {
                 font-size: 6px;
             }
-
             .section {
                 padding: var(--spacing-sm);
                 margin: var(--spacing-md) 0;
             }
-
             .skills-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
-
             .hobbies-grid {
                 grid-template-columns: 1fr;
             }
-
             .aquarium-stats {
                 grid-template-columns: 1fr;
             }
@@ -454,11 +467,9 @@
             .ascii-art {
                 font-size: 5px;
             }
-
             .section-title {
                 font-size: 1rem;
             }
-
             .skills-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -528,21 +539,18 @@
     </style>
 </head>
 <body>
-    <!-- Particles Background -->
     <div id="particles-js"></div>
 
-    <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loading-text">
             <span class="terminal-prompt">$</span>Инициализация системы<span class="dots"></span>
         </div>
     </div>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- Header -->
         <header class="header">
-            <pre class="ascii-art">
+            <h1 class="sr-only">NOOU Portfolio</h1>
+            <pre class="ascii-art" aria-hidden="true">
  ██████   ██████    ██████  
 ██░░░░██ ░░░███    ██░░░░██ 
 ██   ░░   ░███    ░██   ███ 
@@ -552,24 +560,23 @@
  ░░█████████░░░░    ░░░░░░  
    ░░░░░░░░░                  
             </pre>
-            <h1 class="subtitle typing-text" id="main-subtitle">
+            <h2 class="subtitle typing-text" id="main-subtitle">
                 <span class="terminal-prompt">$</span>[ QA Engineer | Automation | AppSec Enthusiast ]<span class="cursor-blink">_</span>
-            </h1>
+            </h2>
         </header>
 
         <div class="ascii-divider">
             +----------------------+----------------------+----------------------+
         </div>
 
-        <!-- About Section -->
         <section class="section" id="about">
             <h2 class="section-title">About</h2>
             <div class="about-text">
                 <p>
                     <span class="terminal-prompt">></span> Инициализация личности...<br><br>
                     <span class="label">ОС:</span> <span class="highlight">Arch Linux</span> — минимализм и контроль.<br>
-                    <span class="label">База знаний:</span> <span class="highlight">Obsidian</span> — вторая память.<br>
-                    <span class="label">Интересы:</span> <span class="highlight">Безопасность</span>, <span class="highlight">Велосипеды</span>, <span class="highlight">Аквариумистика</span>.<br>
+                    <span class="label">База знаний:</span> <span class="highlight">Obsidian</span> — docs-as-code и вторая память.<br>
+                    <span class="label">Интересы:</span> <span class="highlight">Безопасность</span>, <span class="highlight">Аквариумистика</span>, <span class="highlight">Локальные LLM</span>.<br>
                     <span class="label">Философия:</span> Автоматизируй рутину, фокусируйся на сложном.
                 </p>
             </div>
@@ -579,7 +586,6 @@
             +----------------------+----------------------+----------------------+
         </div>
 
-        <!-- Projects Section -->
         <section class="section" id="projects">
             <h2 class="section-title">Projects</h2>
             
@@ -596,7 +602,7 @@
             <div class="project-card glitch">
                 <div class="project-name">[ ShieldCheck ]</div>
                 <div class="project-desc">
-                    CLI-утилита для автоматического сканирования уязвимостей в веб-приложениях по методологии OWASP.
+                    CLI-утилита для автоматического сканирования уязвимостей (Security Headers, Cookie flags) в веб-приложениях.
                 </div>
                 <a href="https://github.com/noou/shieldcheck" class="project-link" target="_blank" rel="noopener">
                     <span class="terminal-prompt">$</span> github.com/noou/shieldcheck <span class="arrow">--></span>
@@ -604,12 +610,12 @@
             </div>
 
             <div class="project-card glitch">
-                <div class="project-name">[ TermKit ]</div>
+                <div class="project-name">[ WebQuest Sandbox ]</div>
                 <div class="project-desc">
-                    Набор утилит для создания интерактивных терминальных интерфейсов на Python.
+                    Многоэтапный технический квест на FastAPI (работа с HTTP-куки, бинарные редиректы).
                 </div>
-                <a href="https://github.com/noou/termkit" class="project-link" target="_blank" rel="noopener">
-                    <span class="terminal-prompt">$</span> github.com/noou/termkit <span class="arrow">--></span>
+                <a href="#" class="project-link" target="_blank" rel="noopener">
+                    <span class="terminal-prompt">$</span> local/sandbox <span class="arrow">--></span>
                 </a>
             </div>
         </section>
@@ -618,7 +624,6 @@
             +----------------------+----------------------+----------------------+
         </div>
 
-        <!-- Skills Section -->
         <section class="section" id="skills">
             <h2 class="section-title">Hard Skills</h2>
             
@@ -629,20 +634,22 @@
                 <span class="skill-tag glitch">Bash</span>
                 <span class="skill-tag glitch">SQL</span>
 
-                <div class="skill-category">// Frameworks</div>
-                <span class="skill-tag glitch">FastAPI</span>
+                <div class="skill-category">// QA & Performance</div>
                 <span class="skill-tag glitch">PyTest</span>
-                <span class="skill-tag glitch">Vanilla JS</span>
+                <span class="skill-tag glitch">Locust</span>
+                <span class="skill-tag glitch">JMeter</span>
+                <span class="skill-tag glitch">Postman/Newman</span>
 
-                <div class="skill-category">// DevOps</div>
+                <div class="skill-category">// Frameworks & Tools</div>
+                <span class="skill-tag glitch">FastAPI</span>
                 <span class="skill-tag glitch">Docker</span>
                 <span class="skill-tag glitch">Nginx</span>
-                <span class="skill-tag glitch">CI/CD</span>
+                <span class="skill-tag glitch">Linux (Arch)</span>
 
                 <div class="skill-category">// Security</div>
                 <span class="skill-tag glitch">OWASP ZAP</span>
                 <span class="skill-tag glitch">Burp Suite</span>
-                <span class="skill-tag glitch">SAST/DAST</span>
+                <span class="skill-tag glitch">mitmproxy</span>
             </div>
         </section>
 
@@ -650,35 +657,28 @@
             +----------------------+----------------------+----------------------+
         </div>
 
-        <!-- Hobbies Section -->
         <section class="section" id="hobbies">
-            <h2 class="section-title">Hobbies</h2>
+            <h2 class="section-title">Terminal Nodes</h2>
             
             <div class="hobbies-grid">
-                <!-- EDC Kit Widget -->
                 <div class="hobby-widget">
                     <div class="widget-title">
                         <span class="terminal-prompt">$</span> EDC KIT
                     </div>
                     <div class="edc-item">
                         <span class="edc-icon">⚡</span>
-                        <span>Нож — Benchmade Griptilian</span>
+                        <span>Нож — Карманный фолдер</span>
                     </div>
                     <div class="edc-item">
                         <span class="edc-icon">💡</span>
-                        <span>Фонарь — Olight S2R</span>
+                        <span>Фонарь — Компактный EDC</span>
                     </div>
                     <div class="edc-item">
                         <span class="edc-icon">📦</span>
-                        <span>Органайзер — Peak Design</span>
-                    </div>
-                    <div class="edc-item">
-                        <span class="edc-icon">🔧</span>
-                        <span>Мультитул — Leatherman Wave+</span>
+                        <span>Органайзер</span>
                     </div>
                 </div>
 
-                <!-- Aquarium Status Widget -->
                 <div class="hobby-widget">
                     <div class="widget-title">
                         <span class="terminal-prompt">$</span> AQUARIUM STATUS
@@ -693,8 +693,8 @@
                             <span class="stat-value">7.0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">TDS</span>
-                            <span class="stat-value">320 ppm</span>
+                            <span class="stat-label">Население</span>
+                            <span class="stat-value" style="font-size: 0.9rem;">Channa argus / Шпорцевые</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">Статус</span>
@@ -704,6 +704,24 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="hobby-widget">
+                    <div class="widget-title">
+                        <span class="terminal-prompt">$</span> LOCAL AI NODE
+                    </div>
+                    <div class="edc-item">
+                        <span class="edc-icon">🧠</span>
+                        <span>Формат: GGUF</span>
+                    </div>
+                    <div class="edc-item">
+                        <span class="edc-icon">📱</span>
+                        <span>Runner: PocketPal / Termux</span>
+                    </div>
+                    <div class="edc-item">
+                        <span class="edc-icon">⚡</span>
+                        <span>Host: Samsung S22</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -711,195 +729,116 @@
             +----------------------+----------------------+----------------------+
         </div>
 
-        <!-- Footer -->
         <footer class="footer">
             <div class="footer-links">
                 <a href="https://github.com/noou" class="footer-link glitch" target="_blank" rel="noopener">
                     <span class="terminal-prompt">$</span> GitHub
                 </a>
-                <a href="https://t.me/noou" class="footer-link glitch" target="_blank" rel="noopener">
-                    <span class="terminal-prompt">$</span> Telegram
-                </a>
             </div>
             <p class="copyright">
-                © 2024 Noou. Сгенерировано в терминале.<br>
+                © 2026 Noou. Сгенерировано в терминале.<br>
                 <span style="color: var(--dim-color); font-size: 0.65rem;">root@noou:~$ exit</span>
             </p>
         </footer>
     </div>
 
-    <!-- Particles.js Library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <script>
         // ===== Particles.js Configuration =====
         particlesJS('particles-js', {
             particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#00ff41'
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
-                    }
-                },
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff41' },
+                shape: { type: 'circle' },
                 opacity: {
-                    value: 0.3,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
+                    value: 0.3, random: true,
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
                 },
                 size: {
-                    value: 2,
-                    random: true,
-                    anim: {
-                        enable: false,
-                        speed: 40,
-                        size_min: 0.1,
-                        sync: false
-                    }
+                    value: 2, random: true,
+                    anim: { enable: false }
                 },
                 line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#00ff41',
-                    opacity: 0.15,
-                    width: 1
+                    enable: true, distance: 150, color: '#00ff41', opacity: 0.15, width: 1
                 },
                 move: {
-                    enable: true,
-                    speed: 0.5,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
+                    enable: true, speed: 0.5, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false
                 }
             },
             interactivity: {
                 detect_on: 'canvas',
                 events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
+                    onhover: { enable: true, mode: 'grab' },
+                    onclick: { enable: true, mode: 'push' },
                     resize: true
                 },
                 modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 0.4
-                        }
-                    },
-                    bubble: {
-                        distance: 400,
-                        size: 40,
-                        duration: 2,
-                        opacity: 8,
-                        speed: 3
-                    },
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4
-                    },
-                    push: {
-                        particles_nb: 4
-                    },
-                    remove: {
-                        particles_nb: 2
-                    }
+                    grab: { distance: 140, line_linked: { opacity: 0.4 } },
+                    push: { particles_nb: 2 }
                 }
             },
             retina_detect: true
         });
 
         // ===== Loading Screen =====
-        window.addEventListener('load', () => {
+        window.addEventListener('DOMContentLoaded', () => {
+            // Сократил задержку для быстрого UX
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loading-screen');
                 loadingScreen.classList.add('hidden');
                 
-                // Initialize typing effect after loading
-                setTimeout(initTypingEffect, 500);
-            }, 1500);
+                // Инициализация печатной машинки
+                setTimeout(initTypingEffect, 300);
+            }, 500); 
         });
 
         // ===== Typing Effect =====
         function initTypingEffect() {
             const subtitle = document.getElementById('main-subtitle');
-            const text = subtitle.textContent;
-            subtitle.textContent = '';
+            if(!subtitle) return;
+            const text = subtitle.textContent.replace('$', '').replace('_', '').trim();
+            subtitle.innerHTML = '<span class="terminal-prompt">$</span>';
             subtitle.classList.remove('typing-text');
             
             let i = 0;
             const typingInterval = setInterval(() => {
                 if (i < text.length) {
-                    subtitle.textContent += text.charAt(i);
+                    subtitle.innerHTML += text.charAt(i);
                     i++;
                 } else {
                     clearInterval(typingInterval);
-                    // Add cursor blink
                     const cursor = document.createElement('span');
                     cursor.className = 'cursor-blink';
                     cursor.textContent = '_';
                     subtitle.appendChild(cursor);
                 }
-            }, 50);
+            }, 40);
         }
 
-        // ===== Smooth Scroll for Anchor Links =====
+        // ===== Smooth Scroll =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
         // ===== Intersection Observer for Scroll Animations =====
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target); // Отключаем слежение после появления
                 }
             });
         }, observerOptions);
 
-        // Apply fade-in animation to sections
         document.querySelectorAll('.section').forEach(section => {
             section.style.opacity = '0';
             section.style.transform = 'translateY(20px)';
@@ -907,37 +846,27 @@
             observer.observe(section);
         });
 
-        // ===== Dynamic Aquarium Status (Simulated) =====
-        function updateAquariumStats() {
-            const tempElement = document.querySelectorAll('.stat-value')[0];
-            const phElement = document.querySelectorAll('.stat-value')[1];
-            const tdsElement = document.querySelectorAll('.stat-value')[2];
+        // ===== Dynamic Aquarium Status (Оптимизировано) =====
+        // Ищем элементы один раз при загрузке, а не каждые 5 секунд
+        const statValues = document.querySelectorAll('.aquarium-stats .stat-value');
+        if (statValues.length >= 2) {
+            const tempElement = statValues[0];
+            const phElement = statValues[1];
             
-            // Simulate minor fluctuations
-            const temp = (25.5 + (Math.random() - 0.5) * 0.2).toFixed(1);
-            const ph = (7.0 + (Math.random() - 0.5) * 0.1).toFixed(1);
-            const tds = Math.round(320 + (Math.random() - 0.5) * 10);
-            
-            tempElement.textContent = `${temp}°C`;
-            phElement.textContent = ph;
-            tdsElement.textContent = `${tds} ppm`;
+            function updateAquariumStats() {
+                const temp = (25.5 + (Math.random() - 0.5) * 0.2).toFixed(1);
+                const ph = (7.0 + (Math.random() - 0.5) * 0.1).toFixed(1);
+                
+                tempElement.textContent = `${temp}°C`;
+                phElement.textContent = ph;
+            }
+            setInterval(updateAquariumStats, 5000);
         }
-
-        // Update every 5 seconds
-        setInterval(updateAquariumStats, 5000);
 
         // ===== Console Easter Egg =====
         console.log('%c Noou\'s Terminal ', 'background: #0a0a0a; color: #00ff41; font-size: 20px; font-family: monospace; padding: 10px;');
-        console.log('%c Welcome to the terminal. ', 'color: #00cccc; font-family: monospace;');
         console.log('%c $ whoami ', 'color: #00ff41; font-family: monospace;');
-        console.log('%c > QA Engineer | Automation | AppSec Enthusiast ', 'color: #e0e0e0; font-family: monospace;');
-
-        // ===== Keyboard Shortcut (Press 'H' for hidden message) =====
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'h' || e.key === 'H') {
-                console.log('%c Hidden message: Thanks for checking the console! 🚀 ', 'background: #00ff41; color: #0a0a0a; font-size: 14px; font-family: monospace; padding: 5px;');
-            }
-        });
+        console.log('%c > QA Engineer | Test Automation | AppSec ', 'color: #e0e0e0; font-family: monospace;');
     </script>
 </body>
 </html>
